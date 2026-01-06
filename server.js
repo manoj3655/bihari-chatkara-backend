@@ -63,21 +63,18 @@ const initDb = async () => {
             barcode VARCHAR(100)
         )`);
 
-        await ensureTable('menu_items', `CREATE TABLE IF NOT EXISTS menu_items (
-            id VARCHAR(50) PRIMARY KEY,
-            category_id VARCHAR(50),
-            sub_category_id VARCHAR(50),
-            name VARCHAR(100) NOT NULL,
-            category VARCHAR(50) NOT NULL,
-            sub_category VARCHAR(50),
-            price DECIMAL(10,2) NOT NULL,
-            portion_prices JSON,
-            is_veg BOOLEAN DEFAULT FALSE,
-            ingredients JSON,
-            description TEXT,
-            tags JSON,
-            available BOOLEAN DEFAULT TRUE
-        )`);
+        await ensureTable('order_items', `CREATE TABLE IF NOT EXISTS order_items (
+    id VARCHAR(50) PRIMARY KEY,
+    order_id VARCHAR(50) NOT NULL,
+    menu_item_id VARCHAR(50),
+    name VARCHAR(100),
+    quantity INT DEFAULT 1,
+    price_at_order DECIMAL(10,2) NOT NULL,
+    portion VARCHAR(20),
+    modifiers TEXT,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+)`);
+
 
         await ensureTable('orders', `CREATE TABLE IF NOT EXISTS orders (
             id VARCHAR(50) PRIMARY KEY,

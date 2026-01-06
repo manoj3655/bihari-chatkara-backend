@@ -97,7 +97,7 @@ const initDb = async () => {
             quantity INT DEFAULT 1,
             price_at_order DECIMAL(10,2) NOT NULL,
             portion VARCHAR(20),
-            modifiers JSON,
+            modifiers TEXT,
             INDEX (order_id),
             FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
         )`);

@@ -76,6 +76,14 @@ app.get('*', (req, res) => {
 });
 
 // ✅ Start server
+// ==========================
+// API ROUTES
+// ==========================
+app.use("/api", api);
+
+// ==========================
+// HEALTH CHECK ROUTE
+// ==========================
 app.get("/api/health", (req, res) => {
   res.json({
     status: "ok",
@@ -84,6 +92,17 @@ app.get("/api/health", (req, res) => {
   });
 });
 
+// ==========================
+// SPA CATCH-ALL ROUTE
+// ⚠️ YE HAMESHA SABSE LAST ME HONA CHAHIYE
+// ==========================
+app.get("*", (req, res) => {
+  res.sendFile(path.join(clientDistPath, "index.html"));
+});
+
+// ==========================
+// START SERVER
+// ==========================
 app.listen(PORT, () => {
- console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

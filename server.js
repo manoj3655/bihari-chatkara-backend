@@ -76,6 +76,14 @@ app.get('*', (req, res) => {
 });
 
 // ✅ Start server
+app.get("/api/health", (req, res) => {
+  res.json({
+    status: "ok",
+    service: "Bihari Chatkara RMS",
+    time: new Date().toISOString()
+  });
+});
+
 app.listen(PORT, () => {
  console.log(`Server running on port ${PORT}`);
 });
